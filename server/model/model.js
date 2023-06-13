@@ -1,6 +1,20 @@
 const mongoose = require("mongoose")
 
 var schema = new mongoose.Schema({
+    // name: {
+    //     type: String,
+    //     require: true
+    // },
+    // email: {
+    //     type: String,
+    //     require: true,
+    //     unique: true,
+    //     toLowerCase: true,
+    // },
+    // password: {
+    //     type: String,
+    //     require: true
+    // },
     name: {
         type: String,
         require: true
@@ -8,11 +22,22 @@ var schema = new mongoose.Schema({
     email: {
         type: String,
         require: true,
-        unique: true,
-        toLowerCase: true,
+        unique: true
+    },
+    phone: {
+        type: Number,
+        require: true
     },
     password: {
         type: String,
+        require: true
+    },
+    dept: {
+        type: String,
+        require: true
+    },
+    semister: {
+        type: Number,
         require: true
     },
 
@@ -31,11 +56,11 @@ var schema1 = new mongoose.Schema({
         unique: true
     },
     phone: {
-        type: Number,
+        type: String,
         require: true
     },
-    age: {
-        type: Number,
+    password: {
+        type: String,
         require: true
     },
     dept: {

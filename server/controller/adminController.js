@@ -1,6 +1,6 @@
 const session = require("express-session")
 const model = require("../model/model")
-
+const userData = model.Usersignup
 const register = model.Register
 
 
@@ -14,7 +14,7 @@ exports.admin_login = ((req, res) => {
 
 // Admin login 
 const allUsers = async (req, res) => {
-    const users = await register.find()
+    const users = await userData.find()
     res.render("table", { user: users })
 }
 
@@ -44,7 +44,7 @@ exports.admin_logout_post = ((req, res) => {
 exports.user_details = async (req, res) => {
     if (req.session.isAuth) {
         const userid = req.query.id
-        const singleUser = await register.findById(userid)
+        const singleUser = await userData.findById(userid)
         res.render("register", { user: singleUser, viewOnly: true })
     } else {
         res.render("error", { message: "Invalid User please loggin", adminError: true })
@@ -56,8 +56,8 @@ exports.user_details = async (req, res) => {
 exports.update_user = async (req, res) => {
     if (req.session.isAuth) {
         const userid = req.query.id
-        const userData = await register.findById(userid)
-        res.render("register", { user: userData, admin: true })
+        const users = await userData.findById(userid)
+        res.render("register", { user: users, admin: true })
     } else {
         res.render("error", { message: "Invalid User please loggin", adminError: true })
     }
@@ -70,7 +70,7 @@ exports.update_user_post = async (req, res) => {
         const { name, email, phone, age, dept, semister } = req.body;
 
         try {
-            const updatedUser = await register.findByIdAndUpdate(
+            const updatedUser = await userData.findByIdAndUpdate(
                 userId,
                 { name, email, phone, age, dept, semister },
                 { new: true }
@@ -88,7 +88,7 @@ exports.update_user_post = async (req, res) => {
 exports.delete_user = async (req, res) => {
     if (req.session.isAuth) {
         const userid = req.query.id
-        const user = await register.findByIdAndDelete(userid)
+        const user = await userData.findByIdAndDelete(userid)
         allUsers(req, res)
     } else {
         res.render("error", { message: "Invalid User please loggin", adminError: true })

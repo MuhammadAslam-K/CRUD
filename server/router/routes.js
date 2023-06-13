@@ -10,7 +10,7 @@ router.get("/user_signup", userController.user_signup)
 
 // User POST
 router.post("/user_login", userController.user_login_post)
-router.post("/user_signup", userController.user_signup_post)
+// router.post("/user_signup", userController.user_signup_post)
 router.post("/user_register", userController.user_register_post)
 
 // Admin GET
