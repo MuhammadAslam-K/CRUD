@@ -1,0 +1,85 @@
+{{>header}}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                        {{#if admin}}
+                        <form method="post" action="/update_user?id={{user._id}}">
+                            {{else}}
+                            <form method="post" action="/user_register">
+                                {{/if}}
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="text" id="firstName" class="form-control form-control-lg"
+                                                name="name" placeholder="Username" value="{{user.name}}" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input type="email" class="form-control form-control-lg" name="email"
+                                                placeholder="Email ID" value="{{user.email}}" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 d-flex align-items-center">
+
+                                        <div class="form-outline datepicker w-100">
+                                            <input type="number" class="form-control form-control-lg" name="phone"
+                                                placeholder="Phone No" value="{{user.phone}}" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+
+                                        <div class="form-outline">
+                                            <input type="number" id="emailAddress" class="form-control form-control-lg"
+                                                name="age" placeholder="Age" value="{{user.age}}" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4 pb-2">
+
+                                        <div class="form-outline">
+                                            <input type="text" name="dept" placeholder="Dept"
+                                                class="form-control form-control-lg" value="{{user.dept}}" />
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 mb-4 pb-2">
+
+                                        <div class="form-outline">
+                                            <input type="number" name="semister" placeholder="Semister"
+                                                class="form-control form-control-lg" value="{{user.semister}}" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {{#unless viewOnly}}
+                                <div class="mt-4 d-flex justify-content-center ">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                </div>
+                                {{/unless}}
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{>footer}}

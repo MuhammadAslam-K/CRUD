@@ -1,0 +1,51 @@
+{{>header}}
+
+<section class="vh-99 gradient-custom">
+    <form action="/admin_logout" method="post" class="d-grid d-md-flex justify-content-md-end ">
+        <button class="btn btn-outline-light btn-lg px-5 ">logout</button>
+    </form>
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sno</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email Id</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each user}}
+                                <tr>
+                                    <th scope="row">{{@index}}</th>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.email}}</td>
+                                    <td>{{this.dept}}</td>
+                                    <td><a href="/user_details?id={{this._id}}" class="pe-2">More</a>
+                                        <a href="/update_user_details?id={{this._id}}" class="pe-2"><i
+                                                class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="/delete_user?id={{this._id}}"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+{{>footer}}
