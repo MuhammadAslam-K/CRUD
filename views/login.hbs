@@ -9,12 +9,12 @@
     <div class="container py-5 h-100 ">
         <div class="row d-flex justify-content-center align-items-center h-100 ">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5 ">
-                <div class="card bg-dark text-white text-dark rounded">
+                <div class="card bg-dark text-white text-dark" style="border-radius: 2rem;">
                     <div class="card-body p-5 text-center">
                         {{#if admin}}
-                        <form action="/admin_login" method="post">
+                        <form action="/admin_login" method="post" id="myform">
                             {{else}}
-                            <form action="/user_login" method="post">
+                            <form action="/user_login" method="post" id="myform">
                                 {{/if}}
                                 <div class="mb-md-5 mt-md-4 pb-5">
 
@@ -23,19 +23,22 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="email" name="email" id="loginEmail"
-                                            class="form-control form-control-lg" placeholder="Email" />
+                                            class="form-control form-control-lg" placeholder="Email" required />
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <input type="password" name="password" id="loginPassword"
-                                            class="form-control form-control-lg" placeholder="Password" />
-                                        <span id="loginPassworError" style="color: red;"></span>
+                                            class="form-control form-control-lg" placeholder="Password" required />
+
+                                        {{#if message}}
+                                        <span class="" style="color: red;">{{message}}</span>
+                                        {{/if}}
                                     </div>
 
                                     <button onclick="return validation()" class="btn btn-outline-light btn-lg px-5"
                                         type="submit" id="submit">Login</button>
-
                                 </div>
+
                                 {{#unless admin}}
                                 <div>
                                     <p class="mb-0">Don't have an account? <a href="/user_signup"
@@ -51,7 +54,5 @@
         </div>
     </div>
 </section>
-
-
 
 {{>footer}}

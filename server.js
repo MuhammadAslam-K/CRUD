@@ -17,7 +17,6 @@ app.use(nocache());
 
 app.use("/img", express.static(path.join(__dirname, "assets/img")))
 app.use("/css", express.static(path.join(__dirname, "assets/css")))
-app.use("/js", express.static(path.join(__dirname, "assets/js")))
 
 app.use(session({
     secret: uuid(),

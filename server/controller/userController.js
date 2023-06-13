@@ -1,13 +1,20 @@
 const model = require("../model/model")
 const userData = model.Usersignup
-// const register = model.Register
 
 exports.user_login = ((req, res) => {
-    res.render("login")
+    if (req.session.user) {
+        res.redirect('/user_success')
+    } else {
+        res.render("login")
+    }
 })
 
 exports.user_signup = ((req, res) => {
-    res.render("register")
+    if (req.session.user) {
+        res.redirect("/user_seccess")
+    } else {
+        res.render("register", { userSignup: true })
+    }
 })
 
 // user Login
@@ -17,24 +24,32 @@ exports.user_login_post = async (req, res) => {
     const exist = await userData.findOne({ email: email })
     if (exist) {
         if (exist.password === password) {
-            req.session.userLogged = true
-            res.render("Success")
+            req.session.user = email
+            res.redirect("/user_success")
         } else {
-            res.render("error", { message: "The password is incorrect", PasswordError: true })
+            res.render("login", { message: "The password is incorrect" })
         }
     } else {
-        res.render("error", { message: "User not found please signUP", invalidUserError: true })
+        res.render("login", { message: "User not found please signUP" })
     }
+}
+// User Logout
+exports.user_logout_post = (req, res) => {
+    delete req.session.user;
+    res.redirect("/")
 }
 
 
 
-// User Signup
-exports.user_register_post = async (req, res) => {
+// User Registert
+exports.user_signup_post = async (req, res) => {
+    if (req.session.user) {
+        res.redirect("/user_success")
+    }
     const email = req.body.email
     const exist = await userData.findOne({ email: email })
     if (exist) {
-        res.render("error", { message: "The user already Exist please Login", user: true })
+        res.render("register", { message: "The user already Exist please Login", userSignup: true })
     } else {
         const user = new userData({
             name: req.body.name,
@@ -44,6 +59,7 @@ exports.user_register_post = async (req, res) => {
             dept: req.body.dept,
             semister: req.body.semister,
         })
+
         try {
             await user.save()
             res.render("login")
@@ -52,3 +68,13 @@ exports.user_register_post = async (req, res) => {
         }
     }
 }
+
+// user success page
+
+exports.user_success = ((req, res) => {
+    if (req.session.user) {
+        res.render("Success")
+    } else {
+        res.redirect("/")
+    }
+})

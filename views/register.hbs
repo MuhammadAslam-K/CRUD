@@ -3,21 +3,21 @@
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="col-12 col-lg-9 col-xl-7 ">
+                <div class="card shadow-2-strong card-registration bg-dark text-white " style="border-radius: 2rem;">
                     <div class="card-body p-4 p-md-5">
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
                         {{#if admin}}
                         <form method="post" action="/update_user?id={{user._id}}">
                             {{else}}
-                            <form method="post" action="/user_register">
+                            <form method="post" action="/user_signup">
                                 {{/if}}
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
 
                                         <div class="form-outline">
                                             <input type="text" id="firstName" class="form-control form-control-lg"
-                                                name="name" placeholder="Username" value="{{user.name}}" />
+                                                name="name" placeholder="Username" value="{{user.name}}" required />
                                         </div>
 
                                     </div>
@@ -25,7 +25,7 @@
 
                                         <div class="form-outline">
                                             <input type="email" class="form-control form-control-lg" name="email"
-                                                placeholder="Email ID" value="{{user.email}}" />
+                                                placeholder="Email ID" value="{{user.email}}" required />
                                         </div>
 
                                     </div>
@@ -35,8 +35,8 @@
                                     <div class="col-md-6 mb-4 d-flex align-items-center">
 
                                         <div class="form-outline datepicker w-100">
-                                            <input type="number" class="form-control form-control-lg" name="phone"
-                                                placeholder="Phone No" value="{{user.phone}}" />
+                                            <input type="tel" class="form-control form-control-lg" name="phone"
+                                                placeholder="Phone No" value="{{user.phone}}" required />
                                         </div>
 
                                     </div>
@@ -45,7 +45,7 @@
                                         <div class="form-outline">
                                             <input type="password" id="emailAddress"
                                                 class="form-control form-control-lg" name="password"
-                                                placeholder="password" value="{{user.password}}" />
+                                                placeholder="password" value="{{user.password}}" required />
                                         </div>
 
                                     </div>
@@ -56,7 +56,7 @@
 
                                         <div class="form-outline">
                                             <input type="text" name="dept" placeholder="Dept"
-                                                class="form-control form-control-lg" value="{{user.dept}}" />
+                                                class="form-control form-control-lg" value="{{user.dept}}" required />
                                         </div>
 
                                     </div>
@@ -64,17 +64,28 @@
 
                                         <div class="form-outline">
                                             <input type="number" name="semister" placeholder="Semister"
-                                                class="form-control form-control-lg" value="{{user.semister}}" />
+                                                class="form-control form-control-lg" value="{{user.semister}}"
+                                                required />
                                         </div>
 
                                     </div>
                                 </div>
-
+                                {{#if message}}
+                                <span style="color: red;">{{message}}</span>
+                                {{/if}}
                                 {{#unless viewOnly}}
                                 <div class="mt-4 d-flex justify-content-center ">
-                                    <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+                                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="Submit" />
                                 </div>
                                 {{/unless}}
+
+                                {{#if userSignup}}
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <p class="mb-0">Already have an account? <a href="/"
+                                            class="text-white-50 fw-bold">login</a>
+                                    </p>
+                                </div>
+                                {{/if}}
                             </form>
                     </div>
                 </div>

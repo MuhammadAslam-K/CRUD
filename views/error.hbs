@@ -9,12 +9,6 @@
                         <form action="/user_signup" method="get">
                             <h3 class="d-flex d justify-content-center">{{message}}</h3>
                             <div class="d-flex d justify-content-center">
-                                {{#if invalidUserError}}
-                                <input class="btn btn-primary btn-lg" type="submit" value="Signup" />
-                                {{/if}}
-                                {{#if PasswordError}}
-                                <a class="btn btn-primary btn-lg" href="/">Login</a>
-                                {{/if}}
                                 {{#if adminError}}
                                 <a class="btn btn-primary btn-lg" href="/admin_login">Login</a>
                                 {{/if}}
